@@ -159,8 +159,6 @@ const ProjectRow = ({ title, projects, onSelect, variant = 'featured' }: { title
   );
 };
 
-const Player = ReactPlayer as any;
-
 export default function App() {
   const [projects, setProjects] = useState<Project[]>([
     {
@@ -201,6 +199,22 @@ export default function App() {
       type: 'YouTube',
       url: 'https://www.youtube.com/watch?v=TsPiyAVNzUQ&t=96s',
       thumbnail: 'https://img.youtube.com/vi/TsPiyAVNzUQ/maxresdefault.jpg',
+      category: 'Jimarkus Collection'
+    },
+    {
+      id: 'j8',
+      title: 'Jimarkus - IAjLu52kzyM',
+      type: 'YouTube',
+      url: 'https://www.youtube.com/watch?v=IAjLu52kzyM&t=897s',
+      thumbnail: 'https://img.youtube.com/vi/IAjLu52kzyM/maxresdefault.jpg',
+      category: 'Jimarkus Collection'
+    },
+    {
+      id: 'j9',
+      title: 'Jimarkus - Zd1eNllm5ps',
+      type: 'YouTube',
+      url: 'https://www.youtube.com/watch?v=Zd1eNllm5ps',
+      thumbnail: 'https://img.youtube.com/vi/Zd1eNllm5ps/maxresdefault.jpg',
       category: 'Jimarkus Collection'
     },
     {
@@ -620,13 +634,21 @@ export default function App() {
             >
               <X className="w-10 h-10" />
             </button>
-            <div className="w-full max-w-6xl aspect-video rounded-xl overflow-hidden shadow-2xl border border-white/10">
-              <Player 
-                url={activeVideo.url} 
+            <div className="w-full max-w-6xl aspect-video rounded-xl overflow-hidden shadow-2xl border border-white/10 bg-black">
+              <ReactPlayer 
+                src={activeVideo.url.replace('youtube.com/shorts/', 'youtube.com/watch?v=')} 
                 width="100%" 
                 height="100%" 
                 controls 
-                playing
+                playing={true}
+                playsInline
+                config={{
+                  youtube: {
+                    origin: typeof window !== 'undefined' ? window.location.origin : '',
+                    enablejsapi: 1,
+                    rel: 0
+                  }
+                }}
               />
             </div>
           </motion.div>
